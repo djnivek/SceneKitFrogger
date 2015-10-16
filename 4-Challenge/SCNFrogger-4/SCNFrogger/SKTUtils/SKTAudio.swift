@@ -37,19 +37,20 @@ public class SKTAudio {
   public func playBackgroundMusic(filename: String) {
     let url = NSBundle.mainBundle().URLForResource(filename, withExtension: nil)
     if (url == nil) {
-      println("Could not find file: \(filename)")
+      print("Could not find file: \(filename)")
       return
     }
-
-    var error: NSError? = nil
-    backgroundMusicPlayer = AVAudioPlayer(contentsOfURL: url, error: &error)
-    if let player = backgroundMusicPlayer {
-      player.numberOfLoops = -1
-      player.prepareToPlay()
-      player.play()
-    } else {
-      println("Could not create audio player: \(error!)")
+    
+    do {
+        backgroundMusicPlayer = try AVAudioPlayer(contentsOfURL: url!)
+        backgroundMusicPlayer!.numberOfLoops = -1
+        backgroundMusicPlayer!.prepareToPlay()
+        backgroundMusicPlayer!.play()
+    } catch let error as NSError {
+        backgroundMusicPlayer = nil
+        print("Could not create audio player: \(error)")
     }
+    
   }
 
   public func pauseBackgroundMusic() {
@@ -71,18 +72,18 @@ public class SKTAudio {
   public func playSoundEffect(filename: String) {
     let url = NSBundle.mainBundle().URLForResource(filename, withExtension: nil)
     if (url == nil) {
-      println("Could not find file: \(filename)")
+      print("Could not find file: \(filename)")
       return
     }
-
-    var error: NSError? = nil
-    soundEffectPlayer = AVAudioPlayer(contentsOfURL: url, error: &error)
-    if let player = soundEffectPlayer {
-      player.numberOfLoops = 0
-      player.prepareToPlay()
-      player.play()
-    } else {
-      println("Could not create audio player: \(error!)")
+    
+    do {
+        soundEffectPlayer = try AVAudioPlayer(contentsOfURL: url!)
+        soundEffectPlayer!.numberOfLoops = 0
+        soundEffectPlayer!.prepareToPlay()
+        soundEffectPlayer!.play()
+    } catch let error as NSError {
+        soundEffectPlayer = nil
+        print("Could not create audio player: \(error)")
     }
   }
 }

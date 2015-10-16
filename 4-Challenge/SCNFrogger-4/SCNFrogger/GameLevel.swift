@@ -22,7 +22,7 @@ enum GameLevelDataType: Int {
 }
 
 
-class GameLevel: Printable {
+class GameLevel: CustomStringConvertible {
   
   // A delegate that is called when a new car needs to be spawned on a road.
   var spawnDelegate: GameLevelSpawnDelegate?
@@ -95,7 +95,7 @@ class GameLevel: Printable {
   }
   
   
-  func coordinatesForGridPosition(#column: Int, row: Int) -> SCNVector3 {
+  func coordinatesForGridPosition(column column: Int, row: Int) -> SCNVector3 {
     // Raise an error is the column or row is out of bounds
     if column < 0 || column > data.columnCount() - 1 || row < 0 || row > data.rowCount() - 1 {
       fatalError("The row or column is out of bounds")
@@ -141,7 +141,7 @@ class GameLevel: Printable {
   }
   
   
-  func gameLevelDataTypeForGridPosition(#column: Int, row: Int) -> GameLevelDataType {
+  func gameLevelDataTypeForGridPosition(column column: Int, row: Int) -> GameLevelDataType {
     // Raise an error is the column or row is out of bounds
     if column < 0 || column > data.columnCount() - 1 || row < 0 || row > data.rowCount() - 1 {
       return GameLevelDataType.Invalid

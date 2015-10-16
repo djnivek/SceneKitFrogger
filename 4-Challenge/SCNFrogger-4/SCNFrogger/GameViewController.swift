@@ -13,7 +13,7 @@ class GameViewController: UIViewController {
   
   var scnView: SCNView {
     get {
-      return self.view as SCNView
+      return self.view as! SCNView
     }
   }
   
@@ -51,8 +51,8 @@ class GameViewController: UIViewController {
   }
   
   
-  override func supportedInterfaceOrientations() -> Int {
-    return Int(UIInterfaceOrientationMask.Portrait.rawValue)
+  override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+    return UIInterfaceOrientationMask.Portrait
   }
   
   
